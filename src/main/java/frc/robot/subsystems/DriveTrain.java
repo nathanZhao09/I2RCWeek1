@@ -20,7 +20,7 @@ import frc.robot.Constants;
 
 import com.kauailabs.navx.frc.AHRS;
 
-public class DriveTrain extends SubsystemBase 
+public class DriveTrain extends SubsystemBase //etc.
 {
   private final WPI_TalonSRX leftDriveTalon;
   private final WPI_TalonSRX rightDriveTalon;
