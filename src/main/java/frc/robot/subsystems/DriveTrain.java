@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice; //Lines 9-19 could be importing files for the drive train's code
 import com.ctre.phoenix.motorcontrol.NeutralMode;    //here to
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.networktables.GenericEntry;
 import edu.wpi.first.wpilibj.SPI;
@@ -17,8 +18,6 @@ import edu.wpi.first.wpilibj.shuffleboard.ShuffleboardTab;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;   //here
 import frc.robot.Constants;
-
-import com.kauailabs.navx.frc.AHRS;
 
 public class DriveTrain extends SubsystemBase //createing a class (public)
 {
@@ -65,7 +64,7 @@ public class DriveTrain extends SubsystemBase //createing a class (public)
 
   public double getTicks() {
     return (leftDriveTalon.getSelectedSensorPosition(0) + rightDriveTalon.getSelectedSensorPosition(0)) / 2.0;
-  }
+  } //obtaining information from left & right drive talon and sensor
  
   public double getAngle(){
     return navx.getAngle(); 
@@ -76,13 +75,15 @@ public class DriveTrain extends SubsystemBase //createing a class (public)
   }
 
   @Override
-  public void periodic() {
+  public void periodic() { //sends infomration to shufflebord
     SmartDashboard.putNumber("Left Voltage", leftDriveTalon.getMotorOutputPercent());
     SmartDashboard.putNumber("Right Voltage", rightDriveTalon.getMotorOutputPercent());
-    SmartDashboard.putNumber("Angle", navx.getAngle());
+    SmartDashboard.putNumber("Angle", navx.getAngle()); //getting motor's right and left voltages 
+    SmartDashboard.putNumber("Right Ticks", rightDriveTalon.getSelectedSensorPosition());
+    SmartDashboard.putNumber("Left Ticks", leftDriveTalon.getSelectedSensorPosition()); //getting ticks (getting funtion)
+    
 
-    LeftVoltage.setDouble(leftDriveTalon.getMotorOutputPercent());
+    LeftVoltage.setDouble(leftDriveTalon.getMotorOutputPercent()); //sets data in smart dashbord
     RightVoltage.setDouble(rightDriveTalon.getMotorOutputPercent());
-
   }
 }
