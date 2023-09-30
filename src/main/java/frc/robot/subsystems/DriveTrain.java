@@ -84,6 +84,6 @@ public class DriveTrain extends SubsystemBase //createing a class (public)
     
 
     LeftVoltage.setDouble(leftDriveTalon.getMotorOutputPercent()); //sets data in smart dashbord
-    RightVoltage.setDouble(rightDriveTalon.getMotorOutputPercent());
+    RightVoltage.setDouble(rightDriveTalon.getMotorOutputPercent());    
   }
 }
