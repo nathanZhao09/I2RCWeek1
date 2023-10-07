@@ -65,6 +65,11 @@ public class DriveTrain extends SubsystemBase //createing a class (public)
   public double getTicks() {
     return (leftDriveTalon.getSelectedSensorPosition(0) + rightDriveTalon.getSelectedSensorPosition(0)) / 2.0;
   } //obtaining information from left & right drive talon and sensor
+
+  public double ticksToMeters() {
+    return (0.1524 * Math.PI / 4096) * getTicks();
+  }
+
  
   public double getAngle(){
     return navx.getAngle(); 
@@ -81,6 +86,9 @@ public class DriveTrain extends SubsystemBase //createing a class (public)
     SmartDashboard.putNumber("Angle", navx.getAngle()); //getting motor's right and left voltages 
     SmartDashboard.putNumber("Right Ticks", rightDriveTalon.getSelectedSensorPosition());
     SmartDashboard.putNumber("Left Ticks", leftDriveTalon.getSelectedSensorPosition()); //getting ticks (getting funtion)
+
+    SmartDashboard.putNumber("Ticks to Metters", ticksToMeters());
+
     
 
     LeftVoltage.setDouble(leftDriveTalon.getMotorOutputPercent()); //sets data in smart dashbord
