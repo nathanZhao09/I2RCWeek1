@@ -4,46 +4,49 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveTrain;
 
-public class AutoDrive extends CommandBase {
-  DriveTrain dt;
-  double setPoint;
-  /** Creates a new AutoDrive. */
-  public AutoDrive(DriveTrain dt , double setPoint){
-    // Use addRequirements() here to declare subsystem dependencies.
+public class PidTurnCCW extends CommandBase {
+    DriveTrain dt;
+    double angle;
+    double p=0.3/90;//proportinal consant <1 motorpower/setpoint
+    double i=0;
+    double d;
+    int MotorSign;  //if angle is >1 then 
+    PIDController pid= new PIDController(p,i,d);
+
+  /** Creates a new PidTurnCCW. */
+  public PidTurnCCW(DriveTrain dt, double angle) {
     this.dt=dt;
-    this.setPoint=setPoint;
+    this.angle=angle;
     addRequirements(dt);
+    if (angle>0){//conterclockwise turn if >0
+      MotorSign=1;
+    }
+    else{
+      MotorSign=-1; //clockwise turn
+    }
   }
+
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    dt.resetEncoders();
-    dt.tankDrive(0, 0);
+    dt.resetNavx();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
-    dt.tankDrive(0.4,0.4
-    );  
-  }
+  public void execute() {}
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-    dt.resetEncoders();
-    dt.tankDrive(0, 0);
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if(dt.ticksToMeters() >= setPoint){
-      return true;
-    }
     return false;
   }
 }

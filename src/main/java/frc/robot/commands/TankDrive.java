@@ -24,6 +24,7 @@ public class TankDrive extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    dt.resetEncoders();
     dt.tankDrive(0.0, 0.0);
   }
 
@@ -40,6 +41,7 @@ public class TankDrive extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    dt.resetEncoders();
     dt.tankDrive(0.0, 0.0);
   }
 

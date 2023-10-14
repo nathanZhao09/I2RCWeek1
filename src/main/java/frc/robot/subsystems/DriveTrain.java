@@ -39,8 +39,8 @@ public class DriveTrain extends SubsystemBase //createing a class (public)
     leftDriveTalon.setNeutralMode(NeutralMode.Coast); //both set in a neutral mode (not moving)
     rightDriveTalon.setNeutralMode(NeutralMode.Coast);
 
-    leftDriveTalon.setInverted(true); //turing on the inverted for the left drive talon 
-    rightDriveTalon.setInverted(false); //turing off the right driver talon
+    leftDriveTalon.setInverted(false); //turing on the inverted for the left drive talon 
+    rightDriveTalon.setInverted(true); //turing off the right driver talon
 
     leftDriveTalon.setSensorPhase(true); //turns on the left sensors 
     rightDriveTalon.setSensorPhase(true); //turns on the right sensors
