@@ -30,8 +30,9 @@ public class DriveTrain extends SubsystemBase //createing a class (public)
   private GenericEntry LeftVoltage = DTTab.add("Left Voltage", 0.0).getEntry(); //the voltage of the right drive tain
   private GenericEntry RightVoltage = DTTab.add("Right Voltage", 0.0).getEntry();
 
-  /** Creates a new DriveTrain */
-  public DriveTrain() 
+  /** Creates a new DriveTrain 
+   * @param isInverted */
+  public DriveTrain(boolean isInverted) 
   {
     leftDriveTalon = new WPI_TalonSRX(Constants.DriveTrainPorts.LeftDriveTalonPort); //one part of the drive train
     rightDriveTalon = new WPI_TalonSRX(Constants.DriveTrainPorts.RightDriveTalonPort);
@@ -39,8 +40,9 @@ public class DriveTrain extends SubsystemBase //createing a class (public)
     leftDriveTalon.setNeutralMode(NeutralMode.Coast); //both set in a neutral mode (not moving)
     rightDriveTalon.setNeutralMode(NeutralMode.Coast);
 
-    leftDriveTalon.setInverted(false); //turing on the inverted for the left drive talon 
-    rightDriveTalon.setInverted(true); //turing off the right driver talon
+    leftDriveTalon.setInverted(true); //turing on the inverted for the left drive talon 
+    rightDriveTalon.setInverted(false); //turing off the right driver talon
+
 
     leftDriveTalon.setSensorPhase(true); //turns on the left sensors 
     rightDriveTalon.setSensorPhase(true); //turns on the right sensors
@@ -52,6 +54,12 @@ public class DriveTrain extends SubsystemBase //createing a class (public)
 
   }
 
+  private boolean extracted() {
+    boolean isInverted;
+    return (false);
+
+  }
+  
   public void tankDrive(double leftSpeed, double rightSpeed) {
     rightDriveTalon.set(rightSpeed);  //setting the speeds of the the drive talon 
     leftDriveTalon.set(leftSpeed);

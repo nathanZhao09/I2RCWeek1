@@ -4,13 +4,15 @@
 
 package frc.robot;
 
-import frc.robot.commands.*;
-import frc.robot.subsystems.*;
-
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.robot.commands.AutoDrive;
+import frc.robot.commands.PidTurnCCW;
+import frc.robot.commands.TankDrive;
+import frc.robot.subsystems.DriveTrain;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -20,22 +22,25 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-
+  
   
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final Joystick joy1 = new Joystick(Constants.USBOrder.Zero);
 
-  private final DriveTrain dt = new DriveTrain();
+  private final DriveTrain dt = new DriveTrain(false);
+
 
   private final TankDrive tankDrive = new TankDrive(dt, joy1);
 
 
   private final AutoDrive autodrive = new AutoDrive(dt, 1);
 
+  private final PidTurnCCW pidTurnCCW = new PidTurnCCW(dt, 0);
+
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     dt.setDefaultCommand(tankDrive);
-    // Configure the trigger bindings
+    // Configure the trigg1er bindings
     configureBindings();
   }
 
@@ -59,6 +64,16 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return autodrive;
+    return new SequentialCommandGroup(
+      new AutoDrive(dt, 0.5),
+      new PidTurnCCW(dt, 90),
+      new AutoDrive(dt, 0.5),
+      new PidTurnCCW(dt, 90),
+      new AutoDrive(dt, 0.5),
+      new PidTurnCCW(dt, 90),
+      new AutoDrive(dt, 0.5),
+      new PidTurnCCW(dt, 90)
+    );
+
   }
 }

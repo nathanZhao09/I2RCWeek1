@@ -28,14 +28,14 @@ public class TankDrive extends CommandBase {
     dt.tankDrive(0.0, 0.0);
   }
 
-  // Called every time the scheduler runs while the command is scheduled.
+  // Called every time the scheduler runs whie the command is scheduled.
   @Override
   public void execute() {
-    double leftPowerRaw = joy.getRawAxis(1);
+    double leftPowerRaw = joy.getRawAxis(10);
 
-    double rightPowerRaw = joy.getRawAxis(5);
+    double rightPowerRaw = joy.getRawAxis(10);
 
-    dt.tankDrive(leftPowerRaw*-0.7, rightPowerRaw*-0.7);
+    dt.tankDrive(leftPowerRaw*-0.2, rightPowerRaw*-0.2);
   }
 
   // Called once the command ends or is interrupted.

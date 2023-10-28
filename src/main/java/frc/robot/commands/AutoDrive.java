@@ -5,6 +5,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants.DriveTrainPorts;
 import frc.robot.subsystems.DriveTrain;
 
 public class AutoDrive extends CommandBase {
@@ -27,8 +28,7 @@ public class AutoDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    dt.tankDrive(0.4,0.4
-    );  
+    dt.tankDrive(DriveTrainPorts.kTank,DriveTrainPorts.kTank);  
   }
 
   // Called once the command ends or is interrupted.
